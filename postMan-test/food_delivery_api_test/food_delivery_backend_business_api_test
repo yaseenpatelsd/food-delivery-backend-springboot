@@ -1,0 +1,149 @@
+{
+  "delivery-partner": [
+    {
+      "name": "Business listing on website",
+      "method": "POST",
+      "url": "/business/list",
+      "request": {
+        "name": "ys RESTAURANT",
+        "businessType": "RESTAURANT",
+        "address": "sakinaka in between trafic lot of traffic",
+        "city": "mumabai",
+        "state": "Maharashtra",
+        "country": "india",
+        "isActive": true,
+        "status": "OPEN",
+        "cuisineType": "indian",
+        "fssaiNumber": "ggppaa34324hs",
+        "vegType": "NON_VEG"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "name": "ys RESTAURANT",
+          "businessType": "RESTAURANT",
+          "address": "sakinaka in between trafic lot of traffic",
+          "city": "mumabai",
+          "state": "Maharashtra",
+          "country": "india",
+          "isActive": true,
+          "status": "OPEN",
+          "cuisineType": "indian",
+          "fssaiNumber": "ggppaa34324hs",
+          "vegType": "NON_VEG"
+        }
+      }
+    },
+
+    {
+      "name": "Update business details",
+      "method": "PATCH",
+      "url": "/business/edit",
+      "request": {
+        "city": "mumbai"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "name": "ys RESTAURANT",
+          "businessType": "RESTAURANT",
+          "address": "sakinaka in between trafic lot of traffic",
+          "city": "mumbai",
+          "state": "Maharashtra",
+          "country": "india",
+          "isActive": true,
+          "status": "OPEN",
+          "cuisineType": "indian",
+          "fssaiNumber": "ggppaa34324hs",
+          "vegType": "NON_VEG"
+        }
+      }
+    },
+
+    {
+      "name": "Get business list by city",
+      "method": "GET",
+      "url": "/business/get?city=mumbai",
+      "request": {},
+      "response": {
+        "status": 200,
+        "body": [
+          {
+            "name": "ys RESTAURANT",
+            "businessType": "RESTAURANT",
+            "address": "sakinaka in between trafic lot of traffic",
+            "city": "mumbai",
+            "state": "Maharashtra",
+            "country": "india",
+            "isActive": true,
+            "status": "OPEN",
+            "cuisineType": "indian",
+            "fssaiNumber": "ggppaa34324hs",
+            "vegType": "NON_VEG"
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "Get business list by name",
+      "method": "GET",
+      "url": "/business/get?name=ys",
+      "request": {},
+      "response": {
+        "status": 200,
+        "body": [
+          {
+            "name": "ys RESTAURANT",
+            "businessType": "RESTAURANT",
+            "address": "sakinaka in between trafic lot of traffic",
+            "city": "mumbai",
+            "state": "Maharashtra",
+            "country": "india",
+            "isActive": true,
+            "status": "OPEN",
+            "cuisineType": "indian",
+            "fssaiNumber": "ggppaa34324hs",
+            "vegType": "NON_VEG"
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "Get business list by vegType",
+      "method": "GET",
+      "url": "/business/get?vegType=NON_VEG",
+      "request": {},
+      "response": {
+        "status": 200,
+        "body": [
+          {
+            "name": "ys RESTAURANT",
+            "businessType": "RESTAURANT",
+            "address": "sakinaka in between trafic lot of traffic",
+            "city": "mumbai",
+            "state": "Maharashtra",
+            "country": "india",
+            "isActive": true,
+            "status": "OPEN",
+            "cuisineType": "indian",
+            "fssaiNumber": "ggppaa34324hs",
+            "vegType": "NON_VEG"
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "Delisting business from website",
+      "method": "DELETE",
+      "url": "/business/delete",
+      "request": {},
+      "response": {
+        "status": 204,
+        "body": null
+      }
+    }
+  ]
+}

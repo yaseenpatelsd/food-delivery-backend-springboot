@@ -1,0 +1,46 @@
+[
+  {
+    "name": "User Review on a Food",
+    "method": "POST",
+    "url": "/review/food/give",
+    "request": {
+      "foodId": 1,
+      "review": "Good, it is not too oily and has a pretty good taste. It's just not spicy; I will ask for it spicy next time.",
+      "rating": 4
+    },
+    "response": {
+      "review": "Good, it is not too oily and has a pretty good taste. It's just not spicy; I will ask for it spicy next time.",
+      "rating": 4.0
+    }
+  },
+  {
+    "name": "User Review Edit",
+    "method": "PATCH",
+    "url": "/review/food/edit",
+    "request": {
+      "reviewId": 2,
+      "review": "It was good but please make it more spicy"
+    },
+    "response": {
+      "review": "It was good but please make it more spicy",
+      "rating": 4.0
+    }
+  },
+  {
+    "name": "User Review Get",
+    "method": "GET",
+    "url": "/review/food/get/2",
+    "request": {},
+    "response": {
+      "review": "It was good but please make it more spicy",
+      "rating": 4.0
+    }
+  },
+  {
+    "name": "User Delete Review",
+    "method": "DELETE",
+    "url": "/review/food/delete/1",
+    "request": {},
+    "response": {}
+  }
+]
