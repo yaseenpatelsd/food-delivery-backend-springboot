@@ -1,173 +1,214 @@
-Food Delivery Backend API
+# 🍔 Food Delivery Backend API
 
+Comprehensive RESTful backend for a **multi-role food delivery platform** built with **Spring Boot**. The project demonstrates real-world backend engineering concepts including **JWT authentication**, **role-based access control**, **payment integration**, and **complete order lifecycle management** across customers, restaurant owners, and delivery partners.
 
-Comprehensive RESTful backend for a multi-role food delivery platform built with Spring Boot. Features JWT authentication, role-based access control, Razorpay payments, and complete order lifecycle management across customers, restaurant owners, and delivery partners.​
+This repository focuses on **clean architecture, security, and business logic**, making it suitable for internship-level backend roles.
 
-    🚀 Project Overview
+---
 
+## 🚀 Project Overview
 
-This backend powers a full-featured food delivery system supporting three user roles with secure APIs for order placement, restaurant management, delivery tracking, and payment processing. Designed for production-ready scalability with clean Spring Boot architecture, JPA entities, and comprehensive exception handling.​
+This backend powers a food delivery system supporting **three distinct user roles** with secure APIs for:
 
-    ✨ Core Features
-Multi-Role Authentication: Secure JWT login for Customer, Restaurant Owner, Delivery Partner roles with Spring Security RBAC​
+* order placement and tracking
+* restaurant and menu management
+* delivery partner assignment
+* online payment processing
 
-Complete Order Lifecycle: Browse restaurants → Place order → Payment → Assign delivery → Track → Delivered​
+The application is structured using standard **Spring Boot layered architecture (Controller → Service → Repository)** with JPA/Hibernate ORM and centralized exception handling.
 
-Razorpay Payment Integration: Secure online payments with webhook verification​
+---
 
-Real-time Restaurant Management: Menu CRUD, availability toggle, order acceptance​
+## ✨ Core Features
 
-Delivery Partner Dashboard: Order assignment, pickup confirmation, status updates​
+* **Multi-Role Authentication**
+  JWT-based login with **Spring Security** for:
 
-Advanced Features: Order history, ratings, search/filter, email notifications
+  * Customer
+  * Restaurant Owner
+  * Delivery Partner
 
+* **Complete Order Lifecycle**
+  Browse restaurants → Add to cart → Place order → Pay → Assign delivery → Delivered
 
-   | Category       | Technologies                                              |
-| -------------- | --------------------------------------------------------- |
-| Framework      | Spring Boot 3.x, Spring Security, Spring Data JPA github​ |
-| Database       | MySQL 8.0 with JPA/Hibernate ORM github​                  |
-| Authentication | JWT Tokens, BCrypt Password Encoder github​               |
-| Payments       | Razorpay API + Webhooks youtube​                          |
-| Validation     | Bean Validation (Hibernate Validator) github​             |
-| Testing        | Postman API Collection, JUnit [user-information]          |
-| Documentation  | Swagger/OpenAPI (planned) codewithmurad​                  |
+* **Razorpay Payment Integration**
+  Payment order creation and signature verification using Razorpay APIs
 
+* **Restaurant Management**
+  Menu CRUD, availability toggle, order acceptance
 
- Business Features Demonstrated
-Customer Features
-text
-1. Browse restaurants & menus (filter by cuisine, rating, distance)
-2. Add items to cart → Checkout with Razorpay
-3. Track live order status & ETA
-4. Order history & reordering
-5. Rate/review restaurants
-Restaurant Owner Features
-text
-1. Manage menu items (CRUD with images)
+* **Delivery Partner Flow**
+  Order assignment, pickup confirmation, delivery completion
+
+* **Production-Ready Practices**
+  DTO-based responses, validation, pagination, global exception handling
+
+---
+
+## 🛠 Tech Stack
+
+| Category       | Technologies                                      |
+| -------------- | ------------------------------------------------- |
+| Framework      | Spring Boot 3.x, Spring Security, Spring Data JPA |
+| Database       | MySQL 8.0, Hibernate ORM                          |
+| Authentication | JWT, BCrypt Password Encoder                      |
+| Payments       | Razorpay API                                      |
+| Validation     | Bean Validation (Hibernate Validator)             |
+| Testing        | Postman API testing                               |
+
+---
+
+## 👥 Business Features by Role
+
+### Customer
+
+1. Browse restaurants & menus
+2. Place orders and pay online
+3. Track order status
+4. View order history
+
+### Restaurant Owner
+
+1. Manage menu items (CRUD)
 2. Toggle restaurant availability
-3. View/accept pending orders
-4. Update order preparation status
-5. Sales analytics dashboard
-Delivery Partner Features
-text
+3. View and accept orders
+4. Update preparation status
+
+### Delivery Partner
+
 1. View available delivery jobs
-2. Accept pickup → Update en-route status
-3. Mark delivery complete
-4. Earnings dashboard
+2. Accept pickup requests
+3. Update delivery status
 
-       📋 API Endpoints Overview
-text
-/auth:
-  POST /register - Role-based registration
-  POST /login - JWT token generation
+---
 
-/restaurants:
-  GET / - List restaurants (filter, search)
-  GET /{id} - Restaurant details + menu
-  POST /menu - Add menu items (owner only)
+## 📋 API Endpoints Overview
 
-/orders:
-  POST / - Place order + payment
-  GET /my - User order history
-  PUT /{id}/status - Update status (role-specific)
+### Authentication
 
-/payments:
-  POST /razorpay/order - Create payment order
-  POST /razorpay/verify - Payment verification webhook
+```
+POST /auth/register   → Role-based registration
+POST /auth/login      → JWT token generation
+```
 
-/delivery:
-  GET /available - Available jobs (delivery partner)
-  PUT /{orderId}/pickup - Confirm pickup
-  PUT /{orderId}/delivered - Mark complete
+### Restaurants
 
-  
-    🚀 Quick Start
-    # 1. Clone & Setup
-    git clone https://github.com/yaseenpatelsd/food-delivery-backend-springboot.git
-    cd food-delivery-backend-springboot
+```
+GET  /restaurants           → List restaurants
+GET  /restaurants/{id}      → Restaurant details & menu
+POST /restaurants/menu      → Add menu items (Owner only)
+```
 
-    # 2. Database Setup
-    # Create MySQL database: food_delivery_db
-    # Update application.properties with DB credentials & Razorpay keys
+### Orders
 
-    # 3. Run Application
-    ./mvnw clean spring-boot:run
+```
+POST /orders                → Place order & initiate payment
+GET  /orders/my             → User order history
+PUT  /orders/{id}/status    → Update order status (role-specific)
+```
 
-    # 4. Test APIs
-    # Base URL: http://localhost:8080
-    # Import Postman collection (coming soon)
-    🗄 Database Schema
+### Payments
 
-    
-sql
-  
-    Core Entities:
-    ├── users (id, email, password, role: CUSTOMER/RESTAURANT/DELIVERY)
-    ├── restaurants (id, owner_id, name, address, is_active)
-    ├── menu_items (id, restaurant_id, name, price, image_url)
-    ├── orders (id, customer_id, restaurant_id, status, total_amount)
-    ├── order_items (order_id, menu_item_id, quantity, price)
-    ├── payments (id, order_id, razorpay_order_id, status)
-    └── deliveries (id, order_id, delivery_partner_id, status)
+```
+POST /payments/razorpay/order   → Create Razorpay order
+POST /payments/razorpay/verify  → Verify payment signature
+```
 
-    
-    🔒 Security Implementation
+### Delivery
 
+```
+GET  /delivery/available            → Available delivery jobs
+PUT  /delivery/{orderId}/pickup     → Confirm pickup
+PUT  /delivery/{orderId}/delivered  → Mark delivered
+```
 
-JWT Authentication: Stateless token-based auth with refresh tokens​
+---
 
-Role-Based Access: @PreAuthorize annotations on controllers
+## 🚀 Quick Start
 
-Input Validation: @Valid + Custom validators
+### 1. Clone Repository
 
-SQL Injection Protection: JPA parameterized queries
+```bash
+git clone https://github.com/yaseenpatelsd/food-delivery-backend-springboot.git
+cd food-delivery-backend-springboot
+```
 
-📊 Production Features
-text
-✅ Global Exception Handler
-✅ Custom Response DTOs  
-✅ Pagination & Filtering
-✅ Email Service Integration (planned)
-✅ File Upload (restaurant images)
-✅ Swagger API Documentation (planned)
-✅ Docker Support (planned)
-✅ CI/CD Pipeline (planned)
+### 2. Database Setup
 
+* Create MySQL database: `food_delivery_db`
+* Update `application.properties` with:
 
-    🧪 Testing Strategy
-API Testing: Postman collection 
+  * DB credentials
+  * Razorpay key & secret
 
+### 3. Run Application
 
-    📈 Scalability Considerations
-Database: MySQL Master-Slave replication ready
+```bash
+./mvnw clean spring-boot:run
+```
 
-Caching: Redis integration planned for menus
+Base URL: `http://localhost:8080`
 
-Microservices: Modular design for future split
+---
 
-Load Balancing: Spring Cloud LoadBalancer ready
+## 🗄 Database Schema (Simplified)
 
-    🎯 Interview Highlights
-What this project demonstrates:
+Core entities:
 
-Full-stack Backend Expertise: Complete CRUD + Business Logic
+* users
+* restaurants
+* menu_items
+* orders
+* order_items
+* payments
+* deliveries
 
-Security Mastery: JWT + RBAC + OWASP Top 10 protections
+(Refer to `/docs` for ER diagram and API testing resources.)
 
-Payment Integration: Real-world Razorpay implementation
+---
 
-Database Design: Normalized schema with relationships
+## 🔒 Security Implementation
 
-Clean Architecture: Service → Repository → Entity pattern
+* JWT-based stateless authentication
+* Role-based access control using `@PreAuthorize`
+* Input validation using `@Valid`
+* JPA parameterized queries to prevent SQL injection
 
-Production Ready: Exception handling, validation, DTOs
+---
 
-Key Spring Boot Skills Shown:
+## 🧪 Testing
 
-text
-• Spring Security + JWT Configuration
-• JPA/Hibernate Advanced Mapping  
-• REST Controller Best Practices
-• Custom Annotations & Validators
-• Global Exception Handling
-• Async Processing (Order Notifications)
+* API testing performed using **Postman**
+* Postman collection available in the `/docs` directory
+
+---
+
+## 🎯 What This Project Demonstrates
+
+* Real-world backend development with Spring Boot
+* Secure authentication & authorization
+* Payment gateway integration
+* Database design with entity relationships
+* Clean separation of concerns using DTOs and services
+* Error handling and validation suitable for production systems
+
+---
+
+## 🚧 Future Enhancements (Not Yet Implemented)
+
+* Swagger / OpenAPI documentation
+* Dockerization
+* CI/CD pipeline
+* Redis caching
+* Email notifications
+
+---
+
+## 👨‍💻 Author
+
+**Yaseen Patel**
+Backend Developer (Spring Boot)
+
+---
+
+⭐ If you find this project useful, feel free to star the repository!
