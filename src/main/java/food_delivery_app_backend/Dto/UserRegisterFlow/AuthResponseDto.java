@@ -1,0 +1,12 @@
+package food_delivery_app_backend.Dto.UserRegisterFlow;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthResponseDto {
+    private String token;
+}
